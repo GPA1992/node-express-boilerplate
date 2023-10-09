@@ -1,14 +1,38 @@
+import express from 'express';
+import { UserRoutes } from './routes';
+import cors from 'cors';
+;
 
-import { Request, Response } from 'express';
-const express = require('express');
+class App {
+    public app: express.Express;
+    constructor() {
+        this.app = express();
 
-const app = express();
-app.use(express.json());
+        this.config();
 
-app.get('/', (_req: Request, res: Response) => {
-    res.send('Hello World!');
-});
+        this.app.get('/', (req, res) => res.json({ ok: true }));
+    }
 
+    private config(): void {
+        const accessControl: express.RequestHandler = (_req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Methods',
+                'GET,POST,DELETE,OPTIONS,PUT,PATCH'
+            );
+            res.header('Access-Control-Allow-Headers', '*');
+            next();
+        };
 
+        this.app.use(cors());
+        this.app.use(express.json());
+        this.app.use(accessControl);
+        this.app.use('/user', UserRoutes);
+    }
 
-export default app;
+    public start(PORT: string | number): void {
+        this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    }
+}
+
+export { App };
