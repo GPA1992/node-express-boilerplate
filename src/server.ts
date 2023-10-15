@@ -2,7 +2,6 @@ import { App } from "./app";
 import dotenv from 'dotenv';
 dotenv.config();
 
-const PORT = parseInt(`${process.env.PORT}`);
-
+const PORT = Number(process.env.API_PORT);
 
 new App().start(PORT)

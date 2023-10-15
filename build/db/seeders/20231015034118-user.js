@@ -10,7 +10,7 @@ module.exports = {
                 updatedAt: new Date()
             }]);
     },
-    down: (queryInterface, Sequelize) => {
+    async down(queryInterface, Sequelize) {
         return queryInterface.bulkDelete('Users', null, {});
     }
 };

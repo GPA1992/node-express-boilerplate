@@ -3,14 +3,11 @@ import { IUser } from '../types/interfaces/user/UserInterface';
 import db from './index';
 
 
-class User extends Model<IUser> {
+class User extends Model {
   public id!: number;
   public firstName!: string;
   public lastName!: string;
   public email!: string;
-
-  public static associate(models: any): void {
-  }
 }
 
 User.init({
@@ -35,6 +32,8 @@ User.init({
 },
   {
     sequelize: db,
+    createdAt: true,
+    updatedAt: true,
     underscored: false,
     modelName: 'User',
     tableName: 'Users',

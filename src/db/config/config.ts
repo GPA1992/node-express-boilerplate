@@ -1,13 +1,16 @@
 import 'dotenv/config';
 import { Options } from 'sequelize';
 
+console.log('user', process.env.DB_PORT)
+
+
 const config: Options = {
-  username: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.DB_NAME,
-  host: process.env.MYSQL_HOST,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  host: process.env.POSTGRES_HOST,
   port: Number(process.env.DB_PORT),
-  dialect: 'mysql',
+  dialect: 'postgres',
 };
 
 export = config;

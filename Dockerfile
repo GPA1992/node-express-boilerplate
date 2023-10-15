@@ -1,21 +1,12 @@
-FROM node:14
+FROM node:16.14-alpine
+
+WORKDIR  /app
 
 COPY package*.json ./
 
-WORKDIR  /app-backend
-
-RUN npm install
+RUN yarn
 
 COPY . .
 
-ENV DB_HOST=db
-ENV DB_PORT=3306
-ENV DB_USER=root
-ENV DB_PASSWORD=example
-ENV DB_NAME=mydatabase
 
-EXPOSE 5000
-
-
-ENTRYPOINT ["npm", "run"]
-CMD [ "dev"]
+ENTRYPOINT ["npm", "run", "dev"]
